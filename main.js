@@ -1,9 +1,38 @@
+const CARROT_SIZE = 80;
+const CARROT_COUNT = 20;
+const BUG_COUNT = 20;
+
 const field = document.querySelector(".game__field");
 const fieldRect = field.getBoundingClientRect();
-const CARROT_SIZE = 80;
+const gameBtn = document.querySelector(".game__button");
+const timerIndicator = document.querySelector(".game__timer");
+const gameScore = document.querySelector(".game__score");
+
+let started = false;
+let score = 0;
+let timer = undefined;
+
+gameBtn.addEventListener("click", () => {
+  if (started) {
+    stopGame();
+  } else {
+    startGame();
+  }
+  started = !started;
+});
+
+function startGame() {
+  started = true;
+  initGame();
+  showStopButton();
+  showTimerAndScore();
+}
+
+function stopGame() {}
 
 function initGame() {
-  console.log(fieldRect);
+  field.innerHTML = "";
+  gameScore.innerText = CARROT_COUNT;
   addItem("carrot", 5, "img/carrot.png");
   addItem("bug", 5, "img/bug.png");
 }
@@ -26,6 +55,18 @@ function addItem(className, count, imgPath) {
   }
 }
 initGame();
+
+function showStopButton() {
+  const icon = gameBtn.querySelector(".fas");
+  icon.classList.add("fa-stop");
+  icon.classList.remove("fa-play");
+  gameBtn.style.visibility = "visible";
+}
+
+function showTimerAndScore() {
+  timerIndicator.style.visibility = "visible";
+  gameScore.style.visibility = "visible";
+}
 
 function randomNumber(min, max) {
   return Math.random() * (max - min) + min;
