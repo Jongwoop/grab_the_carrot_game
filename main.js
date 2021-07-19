@@ -1,7 +1,9 @@
+"use strict";
+
 const CARROT_SIZE = 80;
-const CARROT_COUNT = 20;
-const BUG_COUNT = 20;
-const GAME_DURATION_SEC = 20;
+const CARROT_COUNT = 5;
+const BUG_COUNT = 5;
+const GAME_DURATION_SEC = 5;
 
 const field = document.querySelector(".game__field");
 const fieldRect = field.getBoundingClientRect();
@@ -17,12 +19,19 @@ let started = false;
 let score = 0;
 let timer = undefined;
 
+field.addEventListener("click", onFieldClick);
+
 gameBtn.addEventListener("click", () => {
   if (started) {
     stopGame();
   } else {
     startGame();
   }
+});
+
+popUpRefresh.addEventListener("click", () => {
+  startGame();
+  hidePopUp();
 });
 
 function startGame() {
@@ -34,16 +43,93 @@ function startGame() {
 }
 
 function stopGame() {
+  started = false;
   stopGameTimer();
   hideGameButton();
   showPopUpWithText("Replay?");
 }
+function finishGame(win) {
+  started = false;
+  hideGameButton();
+  stopGameTimer();
+  showPopUpWithText(win ? "YOU WON 🎉" : "YOU LOST 💩");
+}
+
+function showStopButton() {
+  const icon = gameBtn.querySelector(".fas");
+  icon.classList.add("fa-stop");
+  icon.classList.remove("fa-play");
+  gameBtn.style.visibility = "visible";
+}
+
+function hideGameButton() {
+  gameBtn.style.visibility = "hidden";
+}
+
+function showTimerAndScore() {
+  timerIndicator.style.visibility = "visible";
+  gameScore.style.visibility = "visible";
+}
+
+function startGameTimer() {
+  let remainingTimeSec = GAME_DURATION_SEC;
+  updateTimerText(remainingTimeSec);
+  timer = setInterval(() => {
+    if (remainingTimeSec <= 0) {
+      clearInterval(timer);
+      finishGame(score === CARROT_COUNT);
+      return;
+    }
+    updateTimerText(--remainingTimeSec);
+  }, 1000);
+}
+
+function stopGameTimer() {
+  clearInterval(timer);
+}
+
+function updateTimerText(time) {
+  const minutes = Math.floor(time / 60);
+  const seconds = time % 60;
+  timerIndicator.innerHTML = `${minutes}:${seconds}`;
+}
+
+function showPopUpWithText(text) {
+  popUpText.innerText = text;
+  popUp.classList.remove("pop-up--hide");
+}
+function hidePopUp() {
+  popUp.classList.add("pop-up--hide");
+}
 
 function initGame() {
+  score = 0;
   field.innerHTML = "";
   gameScore.innerText = CARROT_COUNT;
-  addItem("carrot", 5, "img/carrot.png");
-  addItem("bug", 5, "img/bug.png");
+  addItem("carrot", CARROT_COUNT, "img/carrot.png");
+  addItem("bug", BUG_COUNT, "img/bug.png");
+}
+
+function onFieldClick(event) {
+  if (!started) {
+    return;
+  }
+  const target = event.target;
+  if (target.matches(".carrot")) {
+    target.remove();
+    score++;
+    console.log(score);
+    updateScoreBoard();
+    if (score === CARROT_COUNT) {
+      finishGame(true);
+    }
+  } else if (target.matches(".bug")) {
+    finishGame(false);
+  }
+}
+
+function updateScoreBoard() {
+  gameScore.innerText = CARROT_COUNT - score;
 }
 
 function addItem(className, count, imgPath) {
@@ -64,53 +150,6 @@ function addItem(className, count, imgPath) {
   }
 }
 
-function showStopButton() {
-  const icon = gameBtn.querySelector(".fas");
-  icon.classList.add("fa-stop");
-  icon.classList.remove("fa-play");
-  gameBtn.style.visibility = "visible";
-}
-
-function hideGameButton() {
-  gameBtn.style.visibility = "hidden";
-}
-
-function showTimerAndScore() {
-  timerIndicator.style.visibility = "visible";
-  gameScore.style.visibility = "visible";
-}
-function hideGameButton() {
-  gameBtn.style.visibility = "hidden";
-}
-
-function startGameTimer() {
-  let remainingTimeSec = GAME_DURATION_SEC;
-  updateTimerText(remainingTimeSec);
-  timer = setInterval(() => {
-    if (remainingTimeSec <= 0) {
-      clearInterval(timer);
-      return;
-    }
-    updateTimerText(--remainingTimeSec);
-  }, 1000);
-}
-
-function stopGameTimer() {
-  clearInterval(timer);
-}
-function updateTimerText(time) {
-  const minutes = Math.floor(time / 60);
-  const seconds = time % 60;
-  timerIndicator.innerHTML = `${minutes}:${seconds}`;
-}
-
-function showPopUpWithText(text) {
-  popUpText.innerText = text;
-  popUp.classList.remove("pop-up--hide");
-}
-
 function randomNumber(min, max) {
   return Math.random() * (max - min) + min;
 }
-
-initGame();
