@@ -9,6 +9,10 @@ const gameBtn = document.querySelector(".game__button");
 const timerIndicator = document.querySelector(".game__timer");
 const gameScore = document.querySelector(".game__score");
 
+const popUp = document.querySelector(".pop-up");
+const popUpText = document.querySelector(".pop-up__message");
+const popUpRefresh = document.querySelector(".pop-up__refresh");
+
 let started = false;
 let score = 0;
 let timer = undefined;
@@ -19,7 +23,6 @@ gameBtn.addEventListener("click", () => {
   } else {
     startGame();
   }
-  started = !started;
 });
 
 function startGame() {
@@ -30,7 +33,11 @@ function startGame() {
   startGameTimer();
 }
 
-function stopGame() {}
+function stopGame() {
+  stopGameTimer();
+  hideGameButton();
+  showPopUpWithText("Replay?");
+}
 
 function initGame() {
   field.innerHTML = "";
@@ -64,9 +71,16 @@ function showStopButton() {
   gameBtn.style.visibility = "visible";
 }
 
+function hideGameButton() {
+  gameBtn.style.visibility = "hidden";
+}
+
 function showTimerAndScore() {
   timerIndicator.style.visibility = "visible";
   gameScore.style.visibility = "visible";
+}
+function hideGameButton() {
+  gameBtn.style.visibility = "hidden";
 }
 
 function startGameTimer() {
@@ -81,10 +95,18 @@ function startGameTimer() {
   }, 1000);
 }
 
+function stopGameTimer() {
+  clearInterval(timer);
+}
 function updateTimerText(time) {
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
   timerIndicator.innerHTML = `${minutes}:${seconds}`;
+}
+
+function showPopUpWithText(text) {
+  popUpText.innerText = text;
+  popUp.classList.remove("pop-up--hide");
 }
 
 function randomNumber(min, max) {
