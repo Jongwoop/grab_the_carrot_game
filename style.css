@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 * {
   box-sizing: border-box;
 }
@@ -41,10 +42,54 @@ button {
 }
 
 .game__btn:hover {
+=======
+body {
+  text-align: center;
+  background-color: black;
+}
+
+button {
+  outline: none;
+  cursor: pointer;
+  border: none;
+  background: white;
+  border-radius: 20%;
+  padding: 0;
+}
+
+.game {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border-radius: 20px;
+  width: 800px;
+  height: 500px;
+  margin: auto;
+  margin-top: 50px;
+  background: url(img/background.png) center/cover no-repeat;
+}
+
+header {
+  text-align: center;
+  padding: 8px;
+}
+
+.game__button {
+  width: 60px;
+  height: 60px;
+  font-size: 24px;
+  background-color: wheat;
+  border: 4px solid black;
+  transition: transfrom 300ms ease-in;
+}
+
+.game__button:hover {
+>>>>>>> HTML, CSS
   transform: scale(1.1);
 }
 
 .game__timer {
+<<<<<<< HEAD
   border: 2px black solid;
   background-color: white;
   width: 100px;
@@ -93,6 +138,46 @@ button {
   padding: 10px;
   margin: auto;
   transform: translateY(-170%);
+=======
+  display: block;
+  width: 100px;
+  margin: auto;
+  margin-top: 8px;
+  padding: 0 20px;
+  background-color: white;
+  border-radius: 10px;
+  font-size: 32px;
+  border: 5px solid black;
+}
+
+.game__score {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  font-size: 46px;
+  margin-top: 4px;
+  background-color: darksalmon;
+  color: white;
+  border-radius: 50%;
+  border: 3px solid black;
+}
+
+.game__field {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin-top: 40px;
+}
+
+.pop-up {
+  border-radius: 20px;
+  width: 400px;
+  height: 124px;
+  margin: auto;
+  background-color: #00000090;
+  color: white;
+  transform: translateY(-150%);
+>>>>>>> HTML, CSS
 }
 
 .pop-up--hide {
@@ -102,6 +187,7 @@ button {
 .pop-up__refresh {
   width: 60px;
   height: 60px;
+<<<<<<< HEAD
   font-size: 30px;
   margin-bottom: 10px;
   background-color: #f5deb1;
@@ -112,10 +198,20 @@ button {
 
 .pop-up__refresh:hover {
   color: red;
+=======
+  font-size: 24px;
+  background-color: wheat;
+  border: 2px solid black;
+  transition: transfrom 300ms ease-in;
+}
+
+.pop-up__refresh:hover {
+>>>>>>> HTML, CSS
   transform: scale(1.1);
 }
 
 .pop-up__message {
+<<<<<<< HEAD
   font-size: 25px;
   color: white;
   display: block;
@@ -124,6 +220,16 @@ button {
 .bug {
   transition: transform 100ms ease-in;
 }
+=======
+  display: block;
+  font-size: 38px;
+}
+
+.hide {
+  display: none;
+}
+
+>>>>>>> HTML, CSS
 .carrot:hover,
 .bug:hover {
   transform: scale(1.1);
