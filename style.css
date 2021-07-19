@@ -1,48 +1,3 @@
-<<<<<<< HEAD
-* {
-  box-sizing: border-box;
-}
-body {
-  background-color: darkslategrey;
-  font-family: sans-serif;
-}
-.game {
-  text-align: center;
-  background: url(img/background.png) center/cover;
-  border-radius: 20px;
-  width: 800px;
-  height: 500px;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-}
-
-button {
-  border: none;
-  outline: none;
-  background: transparent;
-}
-
-/* Header */
-.game__header {
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  align-items: center;
-}
-.game__btn {
-  width: 60px;
-  height: 60px;
-  font-size: 40px;
-  border: 2px black solid;
-  border-radius: 5px;
-  background-color: wheat;
-  transition: transform 300ms ease-in;
-  cursor: pointer;
-}
-
-.game__btn:hover {
-=======
 body {
   text-align: center;
   background-color: black;
@@ -84,61 +39,10 @@ header {
 }
 
 .game__button:hover {
->>>>>>> HTML, CSS
   transform: scale(1.1);
 }
 
 .game__timer {
-<<<<<<< HEAD
-  border: 2px black solid;
-  background-color: white;
-  width: 100px;
-  height: 40px;
-  margin: 10px auto;
-  border-radius: 5px;
-  font-size: 20px;
-  line-height: 30pt;
-  display: block;
-  visibility: hidden;
-  user-select: none;
-  cursor: auto;
-}
-
-.game__score {
-  border: 2px black solid;
-  background-color: pink;
-  display: block;
-  font-size: 24px;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin: auto;
-  line-height: 35pt;
-  visibility: hidden;
-  user-select: none;
-  cursor: auto;
-}
-
-/* Field */
-.game__field {
-  width: 100%;
-  height: 100%;
-  margin-top: 40px;
-  position: relative;
-}
-
-/* pop-up */
-.pop-up {
-  display: block;
-  text-align: center;
-  background-color: #00000090;
-  border-radius: 20px;
-  width: 320px;
-  height: 120px;
-  padding: 10px;
-  margin: auto;
-  transform: translateY(-170%);
-=======
   display: block;
   width: 100px;
   margin: auto;
@@ -177,7 +81,6 @@ header {
   background-color: #00000090;
   color: white;
   transform: translateY(-150%);
->>>>>>> HTML, CSS
 }
 
 .pop-up--hide {
@@ -187,18 +90,6 @@ header {
 .pop-up__refresh {
   width: 60px;
   height: 60px;
-<<<<<<< HEAD
-  font-size: 30px;
-  margin-bottom: 10px;
-  background-color: #f5deb1;
-  transition: all 300ms ease-in;
-  border-radius: 50%;
-  border: 1px black;
-}
-
-.pop-up__refresh:hover {
-  color: red;
-=======
   font-size: 24px;
   background-color: wheat;
   border: 2px solid black;
@@ -206,21 +97,10 @@ header {
 }
 
 .pop-up__refresh:hover {
->>>>>>> HTML, CSS
   transform: scale(1.1);
 }
 
 .pop-up__message {
-<<<<<<< HEAD
-  font-size: 25px;
-  color: white;
-  display: block;
-}
-.carrot,
-.bug {
-  transition: transform 100ms ease-in;
-}
-=======
   display: block;
   font-size: 38px;
 }
@@ -229,7 +109,6 @@ header {
   display: none;
 }
 
->>>>>>> HTML, CSS
 .carrot:hover,
 .bug:hover {
   transform: scale(1.1);
