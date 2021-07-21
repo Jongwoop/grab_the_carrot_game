@@ -1,8 +1,13 @@
 "use strict";
 import * as sound from "./sound.js";
-import Field from "./field.js";
+import { Field, ItemType } from "./field.js";
 import PopUp from "./popup.js";
 
+const Reason = Object.freeze({
+  win: "win",
+  lose: "lose",
+  cancel: "cancel",
+});
 export default class Game {
   constructor(duration, carrotCount, bugCount) {
     this.duration = duration;
@@ -24,7 +29,7 @@ export default class Game {
     this.timer = undefined;
     this.gameBtn.addEventListener("click", () => {
       if (this.started) {
-        this.stop("cancel");
+        this.stop(Reason.cancel);
       } else {
         this.start();
       }
@@ -35,15 +40,15 @@ export default class Game {
     if (!this.started) {
       return;
     }
-    if (item === "carrot") {
+    if (item === ItemType.carrot) {
       this.score++;
       this.updateScoreBoard();
       sound.playCarrot();
       if (this.score === this.carrotCount) {
-        this.stop("win");
+        this.stop(Reason.win);
       }
-    } else if (item === "bug") {
-      this.stop("lose");
+    } else if (item === ItemType.bug) {
+      this.stop(Reason.lose);
     }
   };
   start = () => {
@@ -64,18 +69,18 @@ export default class Game {
     this.onGameStop && this.onGameStop(Reason);
   }
 
-  onGameStop(Reason) {
+  onGameStop(reason) {
     let message;
-    switch (Reason) {
-      case "win":
+    switch (reason) {
+      case Reason.win:
         sound.playWin();
         message = "YOU WON 🎉";
         break;
-      case "lose":
+      case Reason.lose:
         sound.playBug();
         message = "YOU LOST 💩";
         break;
-      case "cancel":
+      case Reason.cancel:
         sound.playAlert();
         message = "Replay?";
         break;
@@ -111,7 +116,7 @@ export default class Game {
     this.timer = setInterval(() => {
       if (remainingTimeSec <= 0) {
         clearInterval(this.timer);
-        this.stop(this.score === this.carrotCount ? "win" : "lose");
+        this.stop(this.score === this.carrotCount ? Reason.win : Reason.lose);
         return;
       }
       this.updateTimerText(--remainingTimeSec);
