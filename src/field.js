@@ -22,16 +22,16 @@ export class Field {
     const target = event.target;
     if (target.matches(".carrot")) {
       target.remove();
-      this.onItemClick && this.onItemClick("carrot");
+      this.onItemClick && this.onItemClick(ItemType.carrot);
     } else if (target.matches(".bug")) {
-      this.onItemClick && this.onItemClick("bug");
+      this.onItemClick && this.onItemClick(ItemType.bug);
     }
   }
 
   init() {
     this.field.innerHTML = "";
-    this._addItem("carrot", this.carrotCount, "img/carrot.png");
-    this._addItem("bug", this.bugCount, "img/bug.png");
+    this._addItem(ItemType.carrot, this.carrotCount, "img/carrot.png");
+    this._addItem(ItemType.bug, this.bugCount, "img/bug.png");
   }
 
   _addItem(className, count, imgPath) {
