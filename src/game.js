@@ -8,7 +8,29 @@ const Reason = Object.freeze({
   lose: "lose",
   cancel: "cancel",
 });
-export default class Game {
+
+export default class GameBuilder {
+  duration(num) {
+    this.duration = num;
+    return this;
+  }
+  carrotCount(num) {
+    this.carrotCount = num;
+    return this;
+  }
+  bugCount(num) {
+    this.bugCount = num;
+    return this;
+  }
+  build() {
+    return new Game(
+      this.duration, //
+      this.carrotCount,
+      this.bugCount
+    );
+  }
+}
+export class Game {
   constructor(duration, carrotCount, bugCount) {
     this.duration = duration;
     this.carrotCount = carrotCount;
